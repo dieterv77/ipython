@@ -117,7 +117,7 @@ HOME = os.environ.get("HOME","//////:::::ZZZZZ,,,~~~")
 USER           = os.environ.get("USER")
 HOSTNAME       = socket.gethostname()
 HOSTNAME_SHORT = HOSTNAME.split(".")[0]
-ROOT_SYMBOL    = "$#"[os.name=='nt' or os.getuid()==0]
+ROOT_SYMBOL    = "$#"[os_name()=='nt' or os.getuid()==0]
 
 prompt_specials_color = {
     # Prompt/history count
@@ -320,7 +320,7 @@ class BasePrompt(object):
         if '~' in cwd and len(cwd) == depth+1:
             depth += 1
         drivepart = ''
-        if sys.platform == 'win32' and len(cwd) > depth:
+        if sys_platform() == 'win32' and len(cwd) > depth:
             drivepart = os.path.splitdrive(full_cwd)[0]
         out = drivepart + '/'.join(cwd[-depth:])
 

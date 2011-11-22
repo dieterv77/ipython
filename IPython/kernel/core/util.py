@@ -14,6 +14,7 @@ __docformat__ = "restructuredtext en"
 #-------------------------------------------------------------------------------
 
 import os
+from IPython.genutils import os_name
 import sys
 
 
@@ -131,7 +132,7 @@ def system_shell(cmd, verbose=False, debug=False, header=''):
         os.system(cmd)
 
 # Override shell() for win32 to deal with network shares.
-if os.name in ('nt', 'dos'):
+if os_name() in ('nt', 'dos'):
 
     system_shell_ori = system_shell
 

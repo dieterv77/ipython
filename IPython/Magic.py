@@ -218,8 +218,9 @@ python-profiler package from non-free.""")
         # We need to special-case 'print', which as of python2.6 registers as a
         # function but should only be treated as one if print_function was
         # loaded with a future import.  In this case, just bail.
-        if (oname == 'print' and not (self.shell.compile.compiler.flags &
-                                      __future__.CO_FUTURE_PRINT_FUNCTION)):
+        # if (oname == 'print' and not (self.shell.compile.compiler.flags &
+                                      # __future__.CO_FUTURE_PRINT_FUNCTION)):
+        if (oname == 'print'):
             return {'found':found, 'obj':obj, 'namespace':ospace,
                     'ismagic':ismagic, 'isalias':isalias, 'parent':parent}
 
@@ -2482,7 +2483,7 @@ Currently the magic system has the following functions:\n"""
 
         import IPython.rlineimpl as readline
 
-        if not readline.have_readline and sys.platform == "win32":
+        if not readline.have_readline and sys_platform() == "win32":
             msg = """\
 Proper color support under MS Windows requires the pyreadline library.
 You can find it at:
@@ -2709,7 +2710,7 @@ Defaulting color scheme to 'NoColor'"""
         
         alias_table = self.shell.alias_table
         syscmdlist = []
-        if os.name == 'posix':
+        if os_name() == 'posix':
             isexec = lambda fname:os.path.isfile(fname) and \
                      os.access(fname,os.X_OK)
         else:
@@ -2726,7 +2727,7 @@ Defaulting color scheme to 'NoColor'"""
         try:
             # write the whole loop for posix/Windows so we don't have an if in
             # the innermost part
-            if os.name == 'posix':
+            if os_name() == 'posix':
                 for pdir in path:
                     os.chdir(pdir)
                     for ff in os.listdir(pdir):
@@ -3445,7 +3446,7 @@ Defaulting color scheme to 'NoColor'"""
             print "Nuking legacy files:",legacy
             
             [p.remove() for p in legacy]
-            suffix = (sys.platform == 'win32' and '.ini' or '')
+            suffix = (sys_platform() == 'win32' and '.ini' or '')
             (userdir / ('ipythonrc' + suffix)).write_text('# Empty, see ipy_user_conf.py\n')
 
 

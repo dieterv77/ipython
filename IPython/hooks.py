@@ -45,6 +45,7 @@ from IPython import ipapi
 
 import os,bisect
 import sys
+from IPython.genutils import sys_platform
 from genutils import Term,shell
 from pprint import PrettyPrinter
 
@@ -251,9 +252,9 @@ def clipboard_get(self):
     """
     from IPython.clipboard import (osx_clipboard_get, tkinter_clipboard_get, 
         win32_clipboard_get)
-    if sys.platform == 'win32':
+    if sys_platform() == 'win32':
         chain = [win32_clipboard_get, tkinter_clipboard_get]
-    elif sys.platform == 'darwin':
+    elif sys_platform() == 'darwin':
         chain = [osx_clipboard_get, tkinter_clipboard_get]
     else:
         chain = [tkinter_clipboard_get]

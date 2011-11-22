@@ -13,13 +13,15 @@ for your operation system, from platutils_PLATFORMNAME module.
 #*****************************************************************************
 
 import os
+from IPython.genutils import os_name
 import sys
+from IPython.genutils import sys_platform
 import warnings
 
 # Import the platform-specific implementations
-if os.name == 'posix':
+if os_name() == 'posix':
     import platutils_posix as _platutils
-elif sys.platform == 'win32':
+elif sys_platform() == 'win32':
     import platutils_win32 as _platutils
 else:
     import platutils_dummy as _platutils

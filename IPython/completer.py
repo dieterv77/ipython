@@ -70,6 +70,7 @@ import os
 import re
 import shlex
 import sys
+from IPython.genutils import sys_platform
 import IPython.rlineimpl as readline    
 import itertools
 from IPython.ipstruct import Struct
@@ -256,7 +257,7 @@ class IPCompleter(Completer):
         self.dumb_terminal = term in ['dumb','emacs']
         
         # Special handling of backslashes needed in win32 platforms
-        if sys.platform == "win32":
+        if sys_platform() == "win32":
             self.clean_glob = self._clean_glob_win32
         else:
             self.clean_glob = self._clean_glob
@@ -313,7 +314,7 @@ class IPCompleter(Completer):
         # don't want to treat as delimiters in filename matching
         # when escaped with backslash
 
-        if sys.platform == 'win32':
+        if sys_platform() == 'win32':
             protectables = ' '
         else:
             protectables = ' ()'

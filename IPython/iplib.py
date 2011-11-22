@@ -194,7 +194,7 @@ IPython will create a minimal default configuration for you.
         warn(warning)
         wait()
 
-        if sys.platform =='win32':
+        if sys_platform() =='win32':
             inif = 'ipythonrc.ini'
         else:
             inif = 'ipythonrc'
@@ -745,7 +745,7 @@ class InteractiveShell(object,Magic):
 
         # Make some aliases automatically
         # Prepare list of shell aliases to auto-define
-        if os.name == 'posix':
+        if os_name() == 'posix':
             auto_alias = ('mkdir mkdir', 'rmdir rmdir',
                           'mv mv -i','rm rm -i','cp cp -i',
                           'cat cat','less less','clear clear',
@@ -768,7 +768,7 @@ class InteractiveShell(object,Magic):
                          )
             # The BSDs don't ship GNU ls, so they don't understand the
             # --color switch out of the box
-            if 'bsd' in sys.platform:
+            if 'bsd' in sys_platform():
                 ls_extra = ( # ls normal files only
                              'lf ls -lF | grep ^-',
                              # ls symbolic links
@@ -779,7 +779,7 @@ class InteractiveShell(object,Magic):
                              'lx ls -lF | grep ^-..x',
                              )
             auto_alias = auto_alias + ls_extra
-        elif os.name in ['nt','dos']:
+        elif os_name() in ['nt','dos']:
             auto_alias = ('ls dir /on',
                           'ddir dir /ad /on', 'ldir dir /ad /on',
                           'mkdir mkdir','rmdir rmdir','echo echo',
@@ -1297,7 +1297,7 @@ class InteractiveShell(object,Magic):
         If called with no arguments, it acts as a toggle."""
 
         if not self.has_readline:
-            if os.name == 'posix':
+            if os_name() == 'posix':
                 warn("The auto-indent feature requires the readline library")
             self.autoindent = 0
             return
@@ -1443,7 +1443,7 @@ class InteractiveShell(object,Magic):
             self.strdispatchers['complete_command'] = sdisp
             self.Completer.custom_completers = sdisp
             # Platform-specific configuration
-            if os.name == 'nt':
+            if os_name() == 'nt':
                 self.readline_startup_hook = readline.set_pre_input_hook
             else:
                 self.readline_startup_hook = readline.set_startup_hook
@@ -2828,7 +2828,7 @@ class InteractiveShell(object,Magic):
                     print >> sys.stderr, badline
         else:  # regular file execution
             try:
-                if sys.platform == 'win32' and sys.version_info < (2,5,1):
+                if sys_platform() == 'win32' and sys.version_info < (2,5,1):
                     # Work around a bug in Python for Windows.  The bug was
                     # fixed in in Python 2.5 r54159 and 54158, but that's still
                     # SVN Python as of March/07.  For details, see:

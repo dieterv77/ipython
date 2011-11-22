@@ -17,6 +17,7 @@ __docformat__ = "restructuredtext en"
 #-------------------------------------------------------------------------------
 
 import sys
+from IPython.genutils import sys_platform
 import cPickle as pickle
 from types import FunctionType
 import linecache
@@ -192,7 +193,7 @@ class ResultList(list):
     def __repr__(self):
         output = []
         # These colored prompts were not working on Windows
-        if sys.platform == 'win32':
+        if sys_platform() == 'win32':
             blue = normal = red = green = ''
         else:
             blue = TermColors.Blue

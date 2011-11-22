@@ -20,6 +20,7 @@ import Queue
 import inspect
 import os
 import sys
+from IPython.genutils import sys_platform
 import thread
 import threading
 import time
@@ -817,7 +818,7 @@ class IPShellGTK(IPThread):
         else:
             self.gtk.idle_add(self.on_timer)
 
-        if sys.platform != 'win32':
+        if sys_platform() != 'win32':
             try:
                 if self.gtk.gtk_version[0] >= 2:
                     self.gtk.gdk.threads_init()

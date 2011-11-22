@@ -30,7 +30,7 @@ if os.path.exists('MANIFEST'): os.remove('MANIFEST')
 from distutils.core import setup
 
 # Local imports
-from IPython.genutils import target_update
+from IPython.genutils import target_update, os_name
 
 from setupbase import (
     setup_args, 
@@ -47,12 +47,12 @@ isfile = os.path.isfile
 # Handle OS specific things
 #-------------------------------------------------------------------------------
 
-if os.name == 'posix':
+if os_name() == 'posix':
     os_name = 'posix'
-elif os.name in ['nt','dos']:
+elif os_name() in ['nt','dos']:
     os_name = 'windows'
 else:
-    print 'Unsupported operating system:',os.name
+    print 'Unsupported operating system:',os_name()
     sys.exit(1)
 
 # Under Windows, 'sdist' has not been supported.  Now that the docs build with

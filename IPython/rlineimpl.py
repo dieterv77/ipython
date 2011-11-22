@@ -8,6 +8,7 @@ boolean and _outputfile variable used in genutils.
 """
 
 import sys
+from IPython.genutils import sys_platform
 
 try:
     from readline import *
@@ -21,7 +22,7 @@ except ImportError:
     except ImportError:    
         have_readline = False
 
-if sys.platform == 'win32' and have_readline:
+if sys_platform() == 'win32' and have_readline:
     try:
         _outputfile=_rl.GetOutputFile()
     except AttributeError:
@@ -31,7 +32,7 @@ if sys.platform == 'win32' and have_readline:
 # Test to see if libedit is being used instead of GNU readline.
 # Thanks to Boyd Waters for this patch.
 uses_libedit = False
-if sys.platform == 'darwin' and have_readline:
+if sys_platform() == 'darwin' and have_readline:
     import commands
     # Boyd's patch had a 'while True' here, I'm always a little worried about
     # infinite loops with such code, so for now I'm taking a more conservative

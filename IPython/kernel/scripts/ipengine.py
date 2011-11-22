@@ -37,8 +37,8 @@ from IPython.kernel.engineservice import EngineService
 # Create various ipython directories if they don't exist.
 # This must be done before IPython.kernel.config is imported.
 from IPython.iplib import user_setup
-from IPython.genutils import get_ipython_dir, get_log_dir, get_security_dir
-if os.name == 'posix':
+from IPython.genutils import get_ipython_dir, get_log_dir, get_security_dir, os_name
+if os_name() == 'posix':
     rc_suffix = ''
 else:
     rc_suffix = '.ini'

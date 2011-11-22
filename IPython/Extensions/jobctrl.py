@@ -49,7 +49,7 @@ from IPython import genutils
 
 import IPython.ipapi
 
-if os.name == 'nt':
+if genutils.os_name() == 'nt':
     def kill_process(pid):
         os.system('taskkill /F /PID %d' % pid)
 else:
@@ -188,7 +188,7 @@ def magic_kill(self,line):
     except ValueError:
         magic_tasks(self,line)
         
-if sys.platform == 'win32':
+if genutils.sys_platform() == 'win32':
     shell_internal_commands = 'break chcp cls copy ctty date del erase dir md mkdir path prompt rd rmdir start time type ver vol'.split()
     PopenExc = WindowsError
 else:

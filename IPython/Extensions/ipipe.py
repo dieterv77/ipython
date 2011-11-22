@@ -86,6 +86,7 @@ three extensions points (all of them optional):
 skip_doctest = True  # ignore top-level docstring as a doctest.
 
 import sys, os, os.path, stat, glob, new, csv, datetime, types
+from IPython.genutils import sys_platform
 import itertools, mimetypes, StringIO
 
 try: # Python 2.3 compatibility
@@ -1121,7 +1122,7 @@ class ifile(path.path):
     def __repr__(self):
         return "ifile(%s)" % path._base.__repr__(self)
 
-    if sys.platform == "win32":
+    if sys_platform() == "win32":
         defaultattrs = (None, "type", "size", "modestr", "mdate")
     else:
         defaultattrs = (None, "type", "size", "modestr", "owner", "group", "mdate")

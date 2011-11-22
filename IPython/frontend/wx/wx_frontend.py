@@ -26,6 +26,7 @@ __docformat__ = "restructuredtext en"
 import re
 import __builtin__
 import sys
+from IPython.genutils import sys_platform
 from threading import Lock
 
 import wx
@@ -528,7 +529,7 @@ class WxController(ConsoleWidget, PrefilterFrontEnd):
         # Under windows scintilla seems to be doing funny
         # stuff to the line returns here, but the getter for
         # input_buffer filters this out.
-        if sys.platform == 'win32':
+        if sys_platform() == 'win32':
             self.input_buffer = self.input_buffer
         old_prompt_num = self.current_prompt_pos
         has_executed = PrefilterFrontEnd._on_enter(self, 
@@ -573,7 +574,7 @@ class WxController(ConsoleWidget, PrefilterFrontEnd):
         if not self._input_state in ('readline', 'raw_input'):
             return
         end_line = self.GetCurrentLine()
-        if not sys.platform == 'win32':
+        if not sys_platform() == 'win32':
             end_line += 1
         for i in range(self.current_prompt_line, end_line):
             if i in self._markers:

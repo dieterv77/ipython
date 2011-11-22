@@ -34,14 +34,16 @@ from IPython.genutils import (
     get_ipython_dir, 
     get_log_dir, 
     get_security_dir, 
-    num_cpus
+    num_cpus,
+    os_name,
+    sys_platform
 )
 from IPython.kernel.fcutil import have_crypto
 
 # Create various ipython directories if they don't exist.
 # This must be done before IPython.kernel.config is imported.
 from IPython.iplib import user_setup
-if os.name == 'posix':
+if os_name() == 'posix':
     rc_suffix = ''
 else:
     rc_suffix = '.ini'
@@ -185,7 +187,7 @@ class ProcessLauncher(object):
 class ControllerLauncher(ProcessLauncher):
     
     def __init__(self, extra_args=None):
-        if sys.platform == 'win32':
+        if sys_platform() == 'win32':
             # This logic is needed because the ipcontroller script doesn't
             # always get installed in the same way or in the same location.
             from IPython.kernel.scripts import ipcontroller
@@ -207,7 +209,7 @@ class ControllerLauncher(ProcessLauncher):
 class EngineLauncher(ProcessLauncher):
     
     def __init__(self, extra_args=None):
-        if sys.platform == 'win32':
+        if sys_platform() == 'win32':
             # This logic is needed because the ipcontroller script doesn't
             # always get installed in the same way or in the same location.
             from IPython.kernel.scripts import ipengine

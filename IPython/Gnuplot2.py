@@ -25,7 +25,7 @@ import types
 import Gnuplot as Gnuplot_ori
 import Numeric
 
-from IPython.genutils import popkey,xsys
+from IPython.genutils import popkey,xsys,os_name
 
 # needed by hardcopy():
 gp = Gnuplot_ori.gp
@@ -330,7 +330,7 @@ class Gnuplot(Gnuplot_ori.Gnuplot):
             # set null output so nothing goes to screen. hardcopy() restores output
             self('set term dumb')
             # I don't know how to prevent screen output in Windows
-            if os.name == 'posix':
+            if os_name() == 'posix':
                 self('set output "/dev/null"')
 
         new_items = zip_items(items,titles)

@@ -127,7 +127,7 @@ object?   -> Details about 'object'. ?object also works, ?? prints more.
     IP.usage = interactive_usage
 
     # Platform-dependent suffix.
-    if os.name == 'posix':
+    if os_name() == 'posix':
         rc_suffix = ''
     else:
         rc_suffix = '.ini'
@@ -539,7 +539,7 @@ object?   -> Details about 'object'. ?object also works, ?? prints more.
         try:
             ed = os.environ['EDITOR']
         except KeyError:
-            if os.name == 'posix':
+            if os_name() == 'posix':
                 ed = 'vi'  # the only one guaranteed to be there!
             else:
                 ed = 'notepad' # same in Windows!

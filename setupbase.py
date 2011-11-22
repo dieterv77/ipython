@@ -24,6 +24,7 @@ __docformat__ = "restructuredtext en"
 #-------------------------------------------------------------------------------
 
 import os, sys
+from IPython.genutils import sys_platform
 
 from glob import glob
 
@@ -288,7 +289,7 @@ def check_for_dependencies():
     print_raw("BUILDING IPYTHON")
     print_status('python', sys.version)
     print_status('platform', sys.platform)
-    if sys.platform == 'win32':
+    if sys_platform() == 'win32':
         print_status('Windows version', sys.getwindowsversion())
     
     print_raw("")

@@ -9,6 +9,7 @@ compatibility)
 
 from IPython import ipapi
 import os,re,textwrap
+from IPython.genutils import os_name, sys_platform
 
 # The import below effectively obsoletes your old-style ipythonrc[.ini],
 # so consider yourself warned!
@@ -96,7 +97,7 @@ def main():
         syscmds = db.get("syscmdlist")
     
     # lowcase aliases on win32 only
-    if os.name == 'posix':
+    if os_name() == 'posix':
         mapper = lambda s:s
     else:
         def mapper(s): return s.lower()
@@ -118,7 +119,7 @@ def main():
     ip.load("IPython.external.mglob")    
 
     # win32 is crippled w/o cygwin, try to help it a little bit
-    if sys.platform == 'win32':
+    if sys_platform() == 'win32':
         if 'cygwin' in os.environ['PATH'].lower():          
             # use the colors of cygwin ls (recommended)
             ip.defalias('d', 'ls -F --color=auto')

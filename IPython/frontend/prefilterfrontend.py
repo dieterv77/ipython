@@ -22,6 +22,7 @@ __docformat__ = "restructuredtext en"
 # Imports
 #-------------------------------------------------------------------------------
 import sys
+from IPython.genutils import sys_platform
 import pydoc
 import os
 import re
@@ -118,7 +119,7 @@ class PrefilterFrontEnd(LineFrontEndBase):
         self._ip.system = self.system_call
         # XXX: Muck around with magics so that they work better
         # in our environment
-        if not sys.platform.startswith('win'):
+        if not sys_platform().startswith('win'):
             self.ipython0.magic_ls = mk_system_call(self.system_call, 
                                                                 'ls -CF')
         # And now clean up the mess created by ipython0

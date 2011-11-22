@@ -49,6 +49,7 @@ Python 2.5+ or available from http://python.net/crew/theller/ctypes/
 import subprocess
 from subprocess import PIPE
 import sys
+from IPython.genutils import sys_platform
 import os
 import types
 
@@ -66,7 +67,7 @@ except ImportError:
         def __str__(self):
             return "Command '%s' returned non-zero exit status %d" % (self.cmd, self.returncode)
 
-mswindows = (sys.platform == "win32")
+mswindows = (sys_platform() == "win32")
 
 skip = False
 

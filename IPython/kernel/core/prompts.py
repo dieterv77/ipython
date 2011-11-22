@@ -108,7 +108,7 @@ HOME = os.environ.get("HOME","//////:::::ZZZZZ,,,~~~")
 USER           = os.environ.get("USER")
 HOSTNAME       = socket.gethostname()
 HOSTNAME_SHORT = HOSTNAME.split(".")[0]
-ROOT_SYMBOL    = "$#"[os.name=='nt' or os.getuid()==0]
+ROOT_SYMBOL    = "$#"[os_name()=='nt' or os.getuid()==0]
 
 prompt_specials_color = {
     # Prompt/history count

@@ -30,6 +30,7 @@ Date:    9 Mar 2007
 from __future__ import generators
 
 import sys, warnings, os, fnmatch, glob, shutil, codecs
+from IPython.genutils import os_name
 # deprecated in python 2.6
 warnings.filterwarnings('ignore', r'.*md5.*')
 import md5
@@ -38,7 +39,7 @@ __version__ = '2.2'
 __all__ = ['path']
 
 # Platform-specific support for path.owner
-if os.name == 'nt':
+if os_name() == 'nt':
     try:
         import win32security
     except ImportError:
@@ -836,7 +837,7 @@ class path(_base):
         On Windows, this returns a name of the form ur'DOMAIN\User Name'.
         On Windows, a group can own a file or directory.
         """
-        if os.name == 'nt':
+        if os_name() == 'nt':
             if win32security is None:
                 raise Exception("path.owner requires win32all to be installed")
             desc = win32security.GetFileSecurity(

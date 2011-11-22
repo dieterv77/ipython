@@ -25,10 +25,11 @@ import wx.stc  as  stc
 from wx.py import editwindow
 import time
 import sys
+from IPython.genutils import sys_platform
 import string
 
 LINESEP = '\n'
-if sys.platform == 'win32':
+if sys_platform() == 'win32':
     LINESEP = '\n\r'
 
 import re
@@ -43,7 +44,7 @@ _ERROR_MARKER = 30
 _INPUT_MARKER = 29
 
 _DEFAULT_SIZE = 10
-if sys.platform == 'darwin':
+if sys_platform() == 'darwin':
     _DEFAULT_SIZE = 12
 
 _DEFAULT_STYLE = {
@@ -239,7 +240,7 @@ class ConsoleWidget(editwindow.EditWindow):
         if refresh:
             current_time = time.time()
             if current_time - self._last_refresh_time > 0.03:
-                if sys.platform == 'win32':
+                if sys_platform() == 'win32':
                     wx.SafeYield()
                 else:
                     wx.Yield()
